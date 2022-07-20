@@ -19,6 +19,7 @@ RUN cd /tmp \
 
 FROM debian:stable as libre
 ARG SNPSRV_VERSION=0.26.0-1
+ARG LIBRESPOT_VERSION=0.4.1 
 ENV Version=$LIBRESPOT_VERSION
 
 RUN apt-get update \
