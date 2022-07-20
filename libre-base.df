@@ -1,0 +1,22 @@
+FROM ubuntu:20.10
+
+
+RUN apt-get update \
+    && apt-get -y upgrade \
+    && apt-get install -y --no-install-recommends \
+        build-essential \
+        curl \
+        git \
+        gnupg 
+
+# NOTE: no need to run update again at this point
+# RUN apt-get update
+
+# Get Rust; NOTE: using sh for better compatibility with other base images
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
+
+# Add .cargo/bin to PATH
+ENV PATH="/root/.cargo/bin:${PATH}"
+
+# Check cargo is visible
+RUN cargo --help
