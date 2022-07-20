@@ -4,7 +4,6 @@ ARG RUST_V=1.56.1
 FROM rust:${RUST_V} as librespot
 ARG LIBRESPOT_VERSION=0.3.1 
 
-#WORKDIR /usr/src/libraspot
 
 RUN apt-get update && \
 	apt-get install -y libasound2-dev build-essential pkg-config curl unzip \
@@ -19,7 +18,7 @@ RUN cd /tmp \
 	&& chmod +x /tmp/librespot-master/target/release/librespot
 
 
-FROM crowsbyte/base as libre
+FROM debian:stable as libre
 ARG SNPSRV_VERSION=0.26.0-1
 ENV Version=$SNPSRV_VERSION
 
