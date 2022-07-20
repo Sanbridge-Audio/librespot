@@ -1,9 +1,9 @@
 #Special thanks to PD75 with https://github.com/PD75/docker-librespot
 
 ARG RUST_V=1.56.1
-ARG LIBRESPOT_VERSION=0.4.1 
-FROM rust:${RUST_V} as librespot
 
+FROM rust:${RUST_V} as librespot
+ARG LIBRESPOT_VERSION=0.4.1 
 
 RUN apt-get update && \
 	apt-get install -y libasound2-dev build-essential pkg-config curl unzip \
@@ -20,7 +20,7 @@ RUN cd /tmp \
 
 FROM debian:stable as libre
 #ARG SNPSRV_VERSION=0.26.0-1
-#ARG LIBRESPOT_VERSION=0.4.1 
+ARG LIBRESPOT_VERSION=0.4.1 
 ENV Version=$LIBRESPOT_VERSION
 
 RUN apt-get update \
@@ -38,21 +38,12 @@ RUN apt-get update \
 #Download the most recent s6 overlay.
 ADD https://github.com/just-containers/s6-overlay/releases/download/v2.2.0.3/s6-overlay-amd64.tar.gz /tmp
 RUN tar xzf /tmp/s6-overlay-amd64.tar.gz -C /
-
           
 RUN mkdir -p /data  
 WORKDIR /data
-#RUN mkfifo librefifo 
 
-
-#RUN touch /tmp/librespotfifo
-#WORKDIR /tmp
 CMD mkfifo fifo
 WORKDIR ./
-
-
-
-
 
 COPY --from=librespot /tmp/librespot-master/target/release/librespot /usr/local/bin/
 
@@ -73,7 +64,6 @@ CMD librespot \
     --bitrate "$LIBRESPOT_BITRATE" \
     --initial-volume "$LIBRESPOT_INITVOL" \
     --cache "$LIBRESPOT_CACHE" 
-
 
 EXPOSE 5353
 ENTRYPOINT ["/init"]
