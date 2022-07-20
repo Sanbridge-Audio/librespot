@@ -4,7 +4,6 @@ ARG RUST_V=1.56.1
 FROM rust:${RUST_V} as librespot
 ARG LIBRESPOT_VERSION=0.4.1 
 
-
 RUN apt-get update && \
 	apt-get install -y libasound2-dev build-essential pkg-config curl unzip \
 	&& apt-get clean && rm -fR /var/lib/apt/lists
