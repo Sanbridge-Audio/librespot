@@ -1,8 +1,9 @@
 #Special thanks to PD75 with https://github.com/PD75/docker-librespot
 
 ARG RUST_V=1.56.1
-FROM rust:${RUST_V} as librespot
 ARG LIBRESPOT_VERSION=0.4.1 
+FROM rust:${RUST_V} as librespot
+
 
 RUN apt-get update && \
 	apt-get install -y libasound2-dev build-essential pkg-config curl unzip \
@@ -18,8 +19,8 @@ RUN cd /tmp \
 
 
 FROM debian:stable as libre
-ARG SNPSRV_VERSION=0.26.0-1
-ARG LIBRESPOT_VERSION=0.4.1 
+#ARG SNPSRV_VERSION=0.26.0-1
+#ARG LIBRESPOT_VERSION=0.4.1 
 ENV Version=$LIBRESPOT_VERSION
 
 RUN apt-get update \
