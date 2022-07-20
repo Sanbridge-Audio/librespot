@@ -2,7 +2,7 @@
 
 ARG RUST_V=1.56.1
 FROM rust:${RUST_V} as librespot
-ARG LIBRESPOT_VERSION=0.3.1 
+ARG LIBRESPOT_VERSION=0.4.1 
 
 
 RUN apt-get update && \
