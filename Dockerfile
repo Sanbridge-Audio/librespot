@@ -30,6 +30,7 @@ RUN apt-get update \
 #	alsa-utils \ 
 	xz-utils \
 	coreutils \
+	mosquitto-clients \
 #	alsamixergui \
 	&& apt-get clean && rm -fR /var/lib/apt/lists
 
