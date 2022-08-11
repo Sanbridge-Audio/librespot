@@ -46,7 +46,7 @@ WORKDIR /data
 
 #RUN touch /tmp/librespotfifo
 #WORKDIR /tmp
-CMD mkfifo fifo
+CMD mkfifo snapfifo
 WORKDIR ./
 
 
