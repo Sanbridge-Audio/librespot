@@ -15,8 +15,5 @@ FROM alpine:edge
 RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/testing/" >> /etc/apk/repositories
 RUN apk add --no-cache librespot
 
-#COPY --from=builder /snapcast/server/snapserver /usr/bin/
-#COPY --from=builder /snapweb-0.2.0/dist /usr/share/snapserver/snapweb
-#COPY snapserver.conf /etc/snapserver.conf
-#EXPOSE 1704 1705 1780
+
 ENTRYPOINT $EXTRA_ARGS
