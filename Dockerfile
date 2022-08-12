@@ -16,4 +16,6 @@ RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/testing/" >> /etc/apk/repos
 RUN apk add --no-cache librespot
 
 
-ENTRYPOINT $EXTRA_ARGS
+ENTRYPOINT "librespot"
+
+#$EXTRA_ARGS
