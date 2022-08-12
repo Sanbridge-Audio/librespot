@@ -1,79 +1,22 @@
-#Special thanks to PD75 with https://github.com/PD75/docker-librespot
+#We have to build the develop branch of snapserver for now until the next version is released
+FROM alpine:edge AS builder
+WORKDIR /snapcast
 
-ARG RUST_V=1.56.1
-FROM rust:${RUST_V} as librespot
-ARG LIBRESPOT_VERSION=0.3.1 
-#WORKDIR /usr/src/libraspot
-RUN apt-get update && \
-	apt-get install -y libasound2-dev build-essential pkg-config curl unzip \
-	&& apt-get clean && rm -fR /var/lib/apt/lists
-        
-RUN cd /tmp \
-	&& wget https://github.com/librespot-org/librespot/archive/v${LIBRESPOT_VERSION}.zip \
-	&& unzip v${LIBRESPOT_VERSION}.zip \
-	&& mv librespot-${LIBRESPOT_VERSION} librespot-master \
-	&& cd librespot-master \
-	&& cargo build --release \
-	&& chmod +x /tmp/librespot-master/target/release/librespot
+RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/testing/" >> /etc/apk/repositories
+RUN apk add --no-cache curl bash librespot git alpine-sdk libvorbis-dev soxr-dev flac-dev avahi-dev expat-dev boost-dev opus-dev alsa-lib-dev npm
+#RUN git clone --branch develop https://github.com/badaix/snapcast.git /snapcast
+RUN npm install --silent --save-dev -g typescript@4.3
+#RUN curl -L https://github.com/badaix/snapweb/archive/refs/tags/v0.2.0.tar.gz | tar xz --directory / && cd /snapweb-0.2.0 && make
 
+#RUN make server
 
-FROM debian:stable-slim as libre
-ARG SNPSRV_VERSION=0.26.0-1
-ENV Version=$SNPSRV_VERSION
+FROM alpine:edge
 
-RUN apt-get update \
-	&& apt-get install -y \
-	libasound2-dev \
-	nano \ 
-	tzdata \
-#	pkg-config \
-#	alsa-utils \ 
-	xz-utils \
-	coreutils \
-	mosquitto-clients \
-#	alsamixergui \
-	&& apt-get clean && rm -fR /var/lib/apt/lists
+RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/testing/" >> /etc/apk/repositories
+RUN apk add --no-cache librespot
 
-#Download the most recent s6 overlay.
-ADD https://github.com/just-containers/s6-overlay/releases/download/v2.2.0.3/s6-overlay-amd64.tar.gz /tmp
-RUN tar xzf /tmp/s6-overlay-amd64.tar.gz -C /
-
-          
-RUN mkdir -p /data  
-WORKDIR /data
-#RUN mkfifo librefifo 
-
-
-#RUN touch /tmp/librespotfifo
-#WORKDIR /tmp
-CMD mkfifo snapfifo
-WORKDIR ./
-
-
-
-
-
-COPY --from=librespot /tmp/librespot-master/target/release/librespot /usr/local/bin/
-
-ENV LIBRESPOT_CACHE /tmp
-ENV LIBRESPOT_NAME librespot
-ENV LIBRESPOT_DEVICE /data/snapfifo
-#ENV LIBRESPOT_DEVICE /tmp/snapfifo
-ENV LIBRESPOT_BACKEND pipe
-ENV LIBRESPOT_BITRATE 320
-ENV LIBRESPOT_INITVOL 100
-
-VOLUME /data
-
-CMD librespot \
-    --name "$LIBRESPOT_NAME" \
-    --device "$LIBRESPOT_DEVICE" \
-    --backend "$LIBRESPOT_BACKEND" \
-    --bitrate "$LIBRESPOT_BITRATE" \
-    --initial-volume "$LIBRESPOT_INITVOL" \
-    --cache "$LIBRESPOT_CACHE" 
-
-
-EXPOSE 5353
-ENTRYPOINT ["/init"]
-
+#COPY --from=builder /snapcast/server/snapserver /usr/bin/
+#COPY --from=builder /snapweb-0.2.0/dist /usr/share/snapserver/snapweb
+#COPY snapserver.conf /etc/snapserver.conf
+#EXPOSE 1704 1705 1780
+ENTRYPOINT $EXTRA_ARGS
