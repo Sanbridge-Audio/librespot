@@ -41,7 +41,7 @@ RUN tar xzf /tmp/s6-overlay-amd64.tar.gz -C /
           
 RUN mkdir -p /data  
 WORKDIR /data
-#RUN mkfifo librefifo 
+RUN mkfifo librefifo 
 
 
 #RUN touch /tmp/librespotfifo
