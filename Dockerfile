@@ -1,6 +1,6 @@
 #We have to build the develop branch of snapserver for now until the next version is released
 FROM alpine:edge AS builder
-WORKDIR /snapcast
+#WORKDIR /snapcast
 
 RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/testing/" >> /etc/apk/repositories
 RUN apk add --no-cache curl bash librespot git alpine-sdk libvorbis-dev soxr-dev flac-dev avahi-dev expat-dev boost-dev opus-dev alsa-lib-dev npm
