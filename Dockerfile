@@ -57,11 +57,11 @@ COPY --from=librespot /tmp/librespot-master/target/release/librespot /usr/local/
 
 ENV LIBRESPOT_CACHE /tmp
 ENV LIBRESPOT_NAME librespot
-ENV LIBRESPOT_DEVICE /data/librespotfifo
+ENV LIBRESPOT_DEVICE /data/snapfifo
 #ENV LIBRESPOT_DEVICE /tmp/snapfifo
 ENV LIBRESPOT_BACKEND pipe
 ENV LIBRESPOT_BITRATE 320
-ENV LIBRESPOT_INITVOL 100
+ENV LIBRESPOT_INITVOL 70
 
 VOLUME /data
 
