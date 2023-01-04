@@ -35,8 +35,8 @@ RUN apt-get update \
 	&& apt-get clean && rm -fR /var/lib/apt/lists
 
 #Download the most recent s6 overlay.
-ADD https://github.com/just-containers/s6-overlay/releases/download/v2.2.0.3/s6-overlay-amd64.tar.gz /tmp
-RUN tar xzf /tmp/s6-overlay-amd64.tar.gz -C /
+#ADD https://github.com/just-containers/s6-overlay/releases/download/v2.2.0.3/s6-overlay-amd64.tar.gz /tmp
+#RUN tar xzf /tmp/s6-overlay-amd64.tar.gz -C /
 
           
 RUN mkdir -p /data  
@@ -61,9 +61,11 @@ ENV LIBRESPOT_DEVICE /data/snapfifo
 #ENV LIBRESPOT_DEVICE /tmp/snapfifo
 ENV LIBRESPOT_BACKEND pipe
 ENV LIBRESPOT_BITRATE 320
-ENV LIBRESPOT_INITVOL 70
+ENV LIBRESPOT_INITVOL 65
 
 VOLUME /data
+
+EXPOSE 5353
 
 CMD librespot \
     --name "$LIBRESPOT_NAME" \
@@ -74,6 +76,6 @@ CMD librespot \
     --cache "$LIBRESPOT_CACHE" 
 
 
-EXPOSE 5353
-ENTRYPOINT ["/init"]
+
+#ENTRYPOINT ["/init"]
 
