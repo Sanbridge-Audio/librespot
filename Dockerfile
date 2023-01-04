@@ -18,8 +18,6 @@ RUN cd /tmp \
 
 
 FROM debian:stable-slim as libre
-ARG SNPSRV_VERSION=0.26.0-1
-ENV Version=$SNPSRV_VERSION
 
 RUN apt-get update \
 	&& apt-get install -y \
@@ -31,7 +29,6 @@ RUN apt-get update \
 	xz-utils \
 	coreutils \
 	mosquitto-clients \
-#	alsamixergui \
 	&& apt-get clean && rm -fR /var/lib/apt/lists
 
 #Download the most recent s6 overlay.
@@ -74,8 +71,4 @@ CMD librespot \
     --bitrate "$LIBRESPOT_BITRATE" \
     --initial-volume "$LIBRESPOT_INITVOL" \
     --cache "$LIBRESPOT_CACHE" 
-
-
-
-#ENTRYPOINT ["/init"]
 
