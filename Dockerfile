@@ -26,14 +26,14 @@ RUN apt-get update \
 	nano \ 
 	tzdata \
 #	pkg-config \
-#	alsa-utils \ 
+	alsa-utils \ 
 	xz-utils \
 	coreutils \
 	mosquitto-clients \
 	&& apt-get clean && rm -fR /var/lib/apt/lists
           
-RUN mkdir -p /data  
-WORKDIR /data
+#RUN mkdir -p /data  
+#WORKDIR /data
 RUN mkfifo librefifo 
 
 CMD mkfifo librespotfifo
@@ -49,7 +49,7 @@ ENV LIBRESPOT_BACKEND pipe
 ENV LIBRESPOT_BITRATE 320
 ENV LIBRESPOT_INITVOL 65
 
-VOLUME /data
+#VOLUME /data
 
 EXPOSE 5353
 
