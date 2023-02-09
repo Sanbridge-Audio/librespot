@@ -13,7 +13,8 @@ RUN cd /tmp \
 	&& unzip v${LIBRESPOT_VERSION}.zip \
 	&& mv librespot-${LIBRESPOT_VERSION} librespot-master \
 	&& cd librespot-master \
-    && cargo build --release --features "alsa-backend" \
+#    && cargo build --release --features "alsa-backend" \
+	&& cargo build --release --no-default-features --features alsa-backend \
 #	&& cargo build --release \
 	&& chmod +x /tmp/librespot-master/target/release/librespot
 
@@ -56,7 +57,7 @@ EXPOSE 5353
 CMD librespot \
     --name "$LIBRESPOT_NAME" \
     --device "$LIBRESPOT_DEVICE" \
-    --backend "$LIBRESPOT_BACKEND" \
+ #   --backend "$LIBRESPOT_BACKEND" \
     --bitrate "$LIBRESPOT_BITRATE" \
     --initial-volume "$LIBRESPOT_INITVOL" \
     --cache "$LIBRESPOT_CACHE" 
