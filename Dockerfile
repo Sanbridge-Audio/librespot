@@ -13,8 +13,8 @@ RUN cd /tmp \
 	&& unzip v${LIBRESPOT_VERSION}.zip \
 	&& mv librespot-${LIBRESPOT_VERSION} librespot-master \
 	&& cd librespot-master \
-	#&& cargo build --release \
-	&& cargo build --release --no-default-features --features alsa-backend \
+	&& cargo build --release \
+	#&& cargo build --release --no-default-features --features alsa-backend \
 	&& chmod +x /tmp/librespot-master/target/release/librespot
 
 
