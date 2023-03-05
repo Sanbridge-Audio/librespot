@@ -36,7 +36,6 @@ RUN apt-get update \
 #WORKDIR /data
 #RUN mkfifo librefifo 
 
-#CMD mkfifo librespotfifo
 WORKDIR /
 
 COPY --from=librespot /tmp/librespot-master/target/release/librespot /usr/local/bin/
