@@ -32,19 +32,19 @@ RUN apt-get update \
 	mosquitto-clients \
 	&& apt-get clean && rm -fR /var/lib/apt/lists
           
-RUN mkdir -p /data  
-WORKDIR /data
-RUN mkfifo librefifo 
+#RUN mkdir -p /data  
+#WORKDIR /data
+#RUN mkfifo librefifo 
 
-CMD mkfifo librespotfifo
+#CMD mkfifo librespotfifo
 WORKDIR /
 
 COPY --from=librespot /tmp/librespot-master/target/release/librespot /usr/local/bin/
 
 ENV LIBRESPOT_CACHE /tmp
-ENV LIBRESPOT_NAME librespot
+ENV LIBRESPOT_NAME Librespot
 #ENV LIBRESPOT_DEVICE /data/spotfifo
-ENV LIBRESPOT_DEVICE /tmp/spotfifo
+#ENV LIBRESPOT_DEVICE /tmp/spotfifo
 ENV LIBRESPOT_BACKEND pipe
 ENV LIBRESPOT_BITRATE 320
 ENV LIBRESPOT_INITVOL 65
@@ -55,7 +55,7 @@ EXPOSE 5353
 
 CMD librespot \
     --name "$LIBRESPOT_NAME" \
-    --device "$LIBRESPOT_DEVICE" \
+#    --device "$LIBRESPOT_DEVICE" \
     --backend "$LIBRESPOT_BACKEND" \
     --bitrate "$LIBRESPOT_BITRATE" \
     --initial-volume "$LIBRESPOT_INITVOL" \
