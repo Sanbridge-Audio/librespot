@@ -25,8 +25,8 @@ RUN apt-get update \
 	libasound2-dev \
 	nano \ 
 	tzdata \
-#	pkg-config \
-#	alsa-utils \ 
+	pkg-config \
+	alsa-utils \ 
 	xz-utils \
 	coreutils \
 	mosquitto-clients \
