@@ -1,6 +1,6 @@
 #Special thanks to PD75 with https://github.com/PD75/docker-librespot
 
-ARG RUST_V=1.66
+ARG RUST_V=1.63
 FROM rust:${RUST_V} as librespot
 ARG LIBRESPOT_VERSION=0.4.2 
 
@@ -9,7 +9,8 @@ RUN apt-get update && \
 	&& apt-get clean && rm -fR /var/lib/apt/lists
         
 RUN cd /tmp \
-	&& wget https://github.com/librespot-org/librespot/archive/v${LIBRESPOT_VERSION}.zip \
+	&& wget https://github.com/librespot-org/librespot/archive/refs/tags/v${LIBRESPOT_VERSION}.zip
+	#&& wget https://github.com/librespot-org/librespot/archive/v${LIBRESPOT_VERSION}.zip \
 	&& unzip v${LIBRESPOT_VERSION}.zip \
 	&& mv librespot-${LIBRESPOT_VERSION} librespot-master \
 	&& cd librespot-master \
