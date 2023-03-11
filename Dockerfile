@@ -11,7 +11,7 @@ RUN apk add --no-cache bash librespot=${LIBRESPOT_VERSION} sed
 ENV LIBRESPOT_NAME LibrespotAlpine
 #ENV LIBRESPOT_DEVICE /data/spotfifo
 #ENV LIBRESPOT_DEVICE /tmp/spotfifo
-#ENV LIBRESPOT_BACKEND pipe
+ENV LIBRESPOT_BACKEND pipe
 ENV LIBRESPOT_BITRATE 320
 ENV LIBRESPOT_INITVOL 65
 
@@ -19,7 +19,7 @@ ENV LIBRESPOT_INITVOL 65
 CMD librespot \
     --name "$LIBRESPOT_NAME" \
 #    --device "$LIBRESPOT_DEVICE" \
-#    --backend "$LIBRESPOT_BACKEND" \
+    --backend "$LIBRESPOT_BACKEND" \
     --bitrate "$LIBRESPOT_BITRATE" \
     --initial-volume "$LIBRESPOT_INITVOL" \
 #    --cache "$LIBRESPOT_CACHE" 
