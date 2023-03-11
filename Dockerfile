@@ -7,7 +7,23 @@ RUN apk add --no-cache bash librespot=${LIBRESPOT_VERSION} sed
 #RUN apk update && apk add librespot
 
 
-CMD ["librespot"]
+#ENV LIBRESPOT_CACHE /tmp
+ENV LIBRESPOT_NAME LibrespotAlpine
+#ENV LIBRESPOT_DEVICE /data/spotfifo
+#ENV LIBRESPOT_DEVICE /tmp/spotfifo
+#ENV LIBRESPOT_BACKEND pipe
+ENV LIBRESPOT_BITRATE 320
+ENV LIBRESPOT_INITVOL 65
 
-ENV DEVICE_NAME=Librespot
+#CMD ["librespot"]
+CMD librespot \
+    --name "$LIBRESPOT_NAME" \
+#    --device "$LIBRESPOT_DEVICE" \
+#    --backend "$LIBRESPOT_BACKEND" \
+    --bitrate "$LIBRESPOT_BITRATE" \
+    --initial-volume "$LIBRESPOT_INITVOL" \
+#    --cache "$LIBRESPOT_CACHE" 
+
+
+#ENV DEVICE_NAME=Librespot
 EXPOSE 5353
