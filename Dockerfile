@@ -5,7 +5,7 @@ ARG LIBRESPOT_VERSION=0.4.2-r1
 RUN apk add --no-cache bash librespot=${LIBRESPOT_VERSION} sed
 
 
-CMD 
+CMD librespot
 
 ENV DEVICE_NAME=Librespot
 EXPOSE 5353
