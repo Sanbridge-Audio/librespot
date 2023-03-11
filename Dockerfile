@@ -9,12 +9,12 @@ RUN apt-get update && \
 	&& apt-get clean && rm -fR /var/lib/apt/lists
         
 RUN cd /tmp \
-	&& wget https://github.com/librespot-org/librespot/archive/refs/tags/v${LIBRESPOT_VERSION}.zip
+	&& wget https://github.com/librespot-org/librespot/archive/refs/tags/v${LIBRESPOT_VERSION}.zip \
 	#&& wget https://github.com/librespot-org/librespot/archive/v${LIBRESPOT_VERSION}.zip \
 	&& unzip v${LIBRESPOT_VERSION}.zip \
 	&& mv librespot-${LIBRESPOT_VERSION} librespot-master \
 	&& cd librespot-master \
-	&& cargo build --release 
+	&& cargo build --release \
 	#&& cargo build --release --no-default-features \
 	#&& cargo build --release --no-default-features --features "alsa-backend" \
 	&& chmod +x /tmp/librespot-master/target/release/librespot
