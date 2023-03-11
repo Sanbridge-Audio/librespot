@@ -4,7 +4,7 @@ ARG LIBRESPOT_VERSION=0.4.2-r2
 
 RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/testing/" >> /etc/apk/repositories
 RUN apk add --no-cache bash librespot=${LIBRESPOT_VERSION} sed
-#RUN apk update && apk add librespot
+RUN apk update && apk add alsa-lib busybox-binsh libgcc musl
 
 
 #ENV LIBRESPOT_CACHE /tmp
