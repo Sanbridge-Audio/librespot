@@ -1,5 +1,5 @@
 FROM alpine:latest
-
+ENV APK_REPOSITORIES=http://dl-cdn.alpinelinux.org/alpine/v3.14/main
 #ARG LIBRESPOT_VERSION=0.4.2-r1
 
 #RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/testing/" >> /etc/apk/repositories
