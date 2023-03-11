@@ -1,6 +1,6 @@
 FROM alpine:latest
 #ENV APK_REPOSITORIES=http://dl-cdn.alpinelinux.org/alpine/v3.14/main
-ARG LIBRESPOT_VERSION=0.4.2-r1
+ARG LIBRESPOT_VERSION=0.4.2-r2
 
 RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/testing/" >> /etc/apk/repositories
 RUN apk add --no-cache bash librespot=${LIBRESPOT_VERSION} sed
