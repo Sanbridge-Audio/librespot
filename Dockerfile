@@ -52,13 +52,12 @@ ENV LIBRESPOT_INITVOL 65
 
 VOLUME /usr/local/bin 
 
-EXPOSE 5353
+#EXPOSE 5353
 
-CMD librespot \
-    --name "$LIBRESPOT_NAME" \
-    --device "$LIBRESPOT_DEVICE" \
-    --backend "$LIBRESPOT_BACKEND" \
-    --bitrate "$LIBRESPOT_BITRATE" \
-    --initial-volume "$LIBRESPOT_INITVOL" \
-    --cache "$LIBRESPOT_CACHE" 
+#CMD librespot \
+#    --name "$LIBRESPOT_NAME" \
+#    --backend "$LIBRESPOT_BACKEND" \
+ #   --bitrate "$LIBRESPOT_BITRATE" \
+#    --initial-volume "$LIBRESPOT_INITVOL" \
+#    --cache "$LIBRESPOT_CACHE" 
 
