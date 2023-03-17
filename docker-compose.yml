@@ -13,3 +13,16 @@ services:
     ports:
       - 8989:8989
     restart: unless-stopped
+    
+version: '3'
+services:
+  librespot:
+    image: crowsbyte/librespot
+    container_name: librespot
+    restart: always
+    command: ["--name", "My Spotify Connect", "--username", "<your Spotify username>", "--password", "<your Spotify password>"]
+    network_mode: host
+    ports:
+      - "5353:5353"
+      
+    
