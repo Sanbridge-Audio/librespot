@@ -1,12 +1,22 @@
-version: '3'
+ersion: '3.9'
+
 services:
   librespot:
-    image: crowsbyte/librespot
-    container_name: librespot
-    restart: always
-    command: ["--name", "My Spotify Connect", "--username", "<your Spotify username>", "--password", "<your Spotify password>"]
+    build: 
+      context: .
+      dockerfile: Dockerfile.pi
+    container_name: librespot-mini
+    restart: unless-stopped
     network_mode: host
-    ports:
-      - "5353:5353"
-      
-    
+    devices:
+      - /dev/snd:/dev/snd
+    environment:
+      - TZ=America/New_York
+#      - SNAPCLIENT_SOUNDCARD=sysdefault
+ #     - HOSTID=Trying
+  #    - SNAPCLIENT_HOST=192.168.1.198
+   #   - CLIENTNAME="Desktop Trial" 
+ #     - PULSE_SERVER=unix:/run/user/1000/pulse/native
+ #     - PULSE_SINK=snapcast
+
+
